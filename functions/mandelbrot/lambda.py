@@ -51,5 +51,10 @@ def handler(event, context, verbose=True):
     }
     return {
         "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json", 
+            # "Access-Control-Allow-Origin": "*",
+            # "Access-Control-Allow-Headers": "Access-Control-Request-Headers",
+            },
         "body": json.dumps(response),
     }
