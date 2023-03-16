@@ -38,7 +38,7 @@ def handler(event, context, verbose=True):
     rmin, rmax = real_centre-patch_size/2., real_centre+patch_size/2.
     imin, imax = imag_centre-patch_size/2., imag_centre+patch_size/2.
     max_iters = 64
-    width, height = 200, 200
+    width, height = 1000, 1000
     data = mandelbrot.create_image(
         rmin, rmax, imin, imax, max_iters, width, height)
 
