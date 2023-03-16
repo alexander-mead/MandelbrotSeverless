@@ -3,8 +3,8 @@ import requests
 import sys
 
 # Parameters
-#URL = "http://127.0.0.1:3000"
-URL = "https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com/Prod"
+URL = "http://127.0.0.1:3000"
+#URL = "https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com/Prod"
 OUT = "mandelbrot.html"
 
 # Welcome

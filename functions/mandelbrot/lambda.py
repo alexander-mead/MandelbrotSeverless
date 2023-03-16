@@ -37,7 +37,7 @@ def handler(event, context, verbose=True):
     patch_size = float(body["size"])
     rmin, rmax = real_centre-patch_size/2., real_centre+patch_size/2.
     imin, imax = imag_centre-patch_size/2., imag_centre+patch_size/2.
-    max_iters = 50
+    max_iters = 64
     width, height = 200, 200
     data = mandelbrot.create_image(
         rmin, rmax, imin, imax, max_iters, width, height)
@@ -45,14 +45,14 @@ def handler(event, context, verbose=True):
     # Return the response
     response = {
         "message": "Request received.",
-        "data": str(data), # TODO: Is this necessary?
+        "data": str(data),  # TODO: Is this necessary?
     }
     return {
-        "statusCode": 200, # 200 = OK
-        "headers": { # Headers are necessary for CORS
+        "statusCode": 200,  # 200 = OK
+        "headers": {  # Headers are necessary for CORS
             "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Origin": "*", 
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS", 
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         },
         "body": json.dumps(response),
     }

@@ -1,5 +1,6 @@
 import io
 import numpy as np
+from scipy.ndimage import gaussian_filter
 import matplotlib.pyplot as plt
 import base64
 
@@ -23,21 +24,24 @@ def sample_area(real_start, real_end, imag_start, image_end, max_iters, width, h
 
 
 def create_image(real_start, real_end, imag_start, image_end, max_iters, width, height,
-                 cmap="cubehelix", figsize=(8, 8), dpi=150):
+                 cmap="cubehelix", figsize=(8, 8), dpi=224, sigma=10.):
     """
     Create a png and return it as a binary
     """
     array = sample_area(real_start, real_end, imag_start,
                         image_end, max_iters, width, height)
+    # if sigma != 0.:
+    #     array = gaussian_filter(array, sigma=sigma)
+    print(sigma)
     plt.subplots(figsize=figsize, dpi=dpi, frameon=False)
-    plt.imshow(array, cmap=cmap, vmin=0, vmax=max_iters)
+    plt.imshow(array, cmap=cmap, vmin=0., vmax=max_iters)
     plt.xticks([])
     plt.yticks([])
     plt.tight_layout()
     buffer = io.BytesIO()
     plt.savefig(buffer, format="png", bbox_inches='tight',
-                pad_inches=0)     # Place the png as a binary in memory
-    data = buffer.getvalue()      # Get the binary
-    data = base64.b64encode(data) # Encode to base64 bytes
-    data = data.decode()          # Convert bytes to string
-    return data # Return the encoded png binary
+                pad_inches=0)      # Place the png as a binary in memory
+    data = buffer.getvalue()       # Get the binary
+    data = base64.b64encode(data)  # Encode to base64 bytes
+    data = data.decode()           # Convert bytes to string
+    return data  # Return the encoded png binary
