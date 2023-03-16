@@ -1,6 +1,7 @@
 import io
 import numpy as np
 import matplotlib.pyplot as plt
+import base64
 
 
 def sample_area(real_start, real_end, imag_start, image_end, max_iters, width, height):
@@ -35,5 +36,8 @@ def create_image(real_start, real_end, imag_start, image_end, max_iters, width, 
     plt.tight_layout()
     buffer = io.BytesIO()
     plt.savefig(buffer, format="png", bbox_inches='tight',
-                pad_inches=0)  # Place the png as a binary in memory
-    return buffer.getvalue()   # Return the png binary (avoids saving to disk)
+                pad_inches=0)     # Place the png as a binary in memory
+    data = buffer.getvalue()      # Get the binary
+    data = base64.b64encode(data) # Encode to base64 bytes
+    data = data.decode()          # Convert bytes to string
+    return data # Return the encoded png binary

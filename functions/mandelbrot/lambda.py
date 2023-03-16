@@ -24,7 +24,6 @@ def handler(event, context, verbose=True):
     # Necessary for lambda.py
 
     # See what the handler receives
-    # TODO: Delete (maybe)
     if verbose:
         print()
         print("Event:", type(event), event, "\n")
@@ -45,16 +44,15 @@ def handler(event, context, verbose=True):
     # Return the response
     response = {
         "message": "Request received.",
-        "zero": 0.,
         # "data": json.dump(data.encode("base64")),
         "data": str(data),
     }
     return {
         "statusCode": 200,
         "headers": {
-            "Content-Type": "application/json", 
-            # "Access-Control-Allow-Origin": "*",
-            # "Access-Control-Allow-Headers": "Access-Control-Request-Headers",
-            },
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "*", 
+            "Access-Control-Allow-Methods": "GET, POST", 
+        },
         "body": json.dumps(response),
     }
