@@ -9,11 +9,11 @@ Globals:
       AllowMethods: "'GET,POST,OPTIONS'"
       AllowHeaders: "'content-type'"
       AllowOrigin: "'*'"
-      # AllowCredentials: "'*'"
-  # Function:
-  #   Architectures:
-  #     - arm64
-  #   Timeout: 60
+      AllowCredentials: "'*'"
+  Function:
+    Architectures:
+      - arm64
+    Timeout: 60
 
 Resources:
   MandelbrotFunction:

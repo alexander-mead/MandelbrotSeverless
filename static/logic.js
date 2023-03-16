@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:3000"
+//const baseURL = "http://localhost:3000"
+const baseURL = "https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com/Prod"
 
 const image = () => {
 
@@ -6,8 +7,7 @@ const image = () => {
     const real = document.getElementById("real").value;
     const imag = document.getElementById("imag").value;
     const size = document.getElementById("size").value;
-    
-    const url = baseUrl+"/mandelbrot";
+    const url = baseURL+"/mandelbrot";
     const params = {
         method: "POST", // Unless this is present it will default to "GET"
         headers: {
@@ -21,8 +21,9 @@ const image = () => {
     };
 
     // Fetch
+    console.log("Request sent");
     fetch(url, params)
-        .then((response) => response.json()) // TODO: Use response.blob()
+        .then((response) => response.json()) // TODO: Not blob; maybe use response.blob()?
         .then((blob) => {
             console.log("Response blob received");
             console.log("Blob: "+blob);
@@ -35,7 +36,6 @@ const image = () => {
             console.log("Image displayed")
         })
         //.then(document.getElementById("buttonId").disabled = true) // TODO: Disable button to prevent multiple requests
-        .then("Hello!")
         .catch((error) => {
             console.log('Error:', error)
             console.log("Failed to sample image");

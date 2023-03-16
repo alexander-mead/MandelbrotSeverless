@@ -1,2 +1,6 @@
 # Deployment
 .aws-sam
+
+# Test results
+mandelbrot.html
+mandelbrot.json

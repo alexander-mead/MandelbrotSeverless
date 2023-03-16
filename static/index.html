@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mandy</title>
+    <title>Mandelbrot</title>
     <link rel="stylesheet" href="style.css" />
     <script src="logic.js"></script>
   </head>
   <body>
-    <h1>Hello, world!</h1>
-    <input id="real" type="number" value="-0.5" />
-    <input id="imag" type="number" value="0.0" />
-    <input id="size" type="number" value="2.0" />
-    <button id="clickButton" onClick="image()">Click me!</button>
-    <br /><br />
+    <h1>Plot part of the Mandelbrot set</h1>
+
+    <label for="real">Image centre (real): </label>
+    <input id="real" type="number" value="-0.5" /><br /><br />
+
+    <label for="imag">Image centre (imaginary): </label>
+    <input id="imag" type="number" value="0.0" /><br /><br />
+
+    <label for="size">Image size: </label>
+    <input id="size" type="number" value="2.0" /><br /><br />
+
+    <button id="clickButton" onClick="image()">Generate image!</button
+    ><br /><br />
+
     <!-- <img id="image" src="data:image/png;base64,{data}" /> -->
     <img id="image" src="mandelbrot.png" />
   </body>

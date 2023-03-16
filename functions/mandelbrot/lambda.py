@@ -32,8 +32,9 @@ def handler(event, context, verbose=True):
 
     # Generate image
     body = unwrap_payload(event)
-    real_centre, imag_centre, patch_size = float(  # TODO: This is ugly as fuck
-        body["real"]), float(body["imag"]), float(body["size"])
+    real_centre = float(body["real"])
+    imag_centre = float(body["imag"])
+    patch_size = float(body["size"])
     rmin, rmax = real_centre-patch_size/2., real_centre+patch_size/2.
     imin, imax = imag_centre-patch_size/2., imag_centre+patch_size/2.
     max_iters = 50

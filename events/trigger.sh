@@ -1,9 +1,17 @@
 #!/bin/zsh
 
+#baseURL="http://127.0.0.1:3000"
+baseURL="https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com/Prod"
+URL=$baseURL"/mandelbrot"
+output="mandelbrot.json"
+
+echo ""
+echo "URL: "$URL
+
 # Curl command to trigger the Mandelbrot lambda function
-curl -i -X POST http://127.0.0.1:3000/mandelbrot \
+curl -i -X POST $URL \
     -H 'Content-Type: application/json' \
-    --output mandelbrot.json \
+    --output $output \
     --data-binary @- << EOF
 { 
     "real": "-0.5", 
@@ -11,3 +19,5 @@ curl -i -X POST http://127.0.0.1:3000/mandelbrot \
     "size": "2." 
 }
 EOF
+
+# TODO: Create webpage to view data?

@@ -30,35 +30,41 @@ aws configure
 sam build
 ```
 
-<!-- TODO: Rewrite this -->
 5. Deploy the architecture to AWS. You will need to input the required parameters in the [template.yml](template.yml) file:
 ```bash
-sam deploy --guided
-> Stack Name: twinlab
+sam deploy
 ```
-
-<!-- TODO: Rewrite this -->
-6. After you're done, you can delete the architecture:
+will deploy to the AWS cloud using information in the included `samconfig.toml` file. After you're done, you can delete the architecture:
 ```bash
-aws cloudformation delete-stack --stack-name twinlab
+aws cloudformation delete-stack --stack-name mandelbrot
 ```
 
-## Local Development
-
-You can run the application locally with:
+Alternatively, you can run the api locally with:
 ```bash
 sam local start-api
 ```
-After which you can perform a `GET` request to `localhost`: <!-- TODO: Rewrite this -->
+
+After either local or remote deployment, you can trigger the `lambda` function in any of three ways:
+
+1. After which you can perform a `POST` request to `localhost`. For example (for local deployment):
 ```bash
-curl http://localhost:3000/preprocess
+curl -i -X POST http://127.0.0.1:3000/mandelbrot \
+    -H 'Content-Type: application/json' \
+    --output mandelbrot.json \
+    --data-binary @- << EOF
+{ 
+    "real": "-0.5", 
+    "imag": "0.", 
+    "size": "2." 
+}
+EOF
 ```
+which can also be found in `events/trigger.sh`. The output of the request is then in `mandelbrot.json`
 
-## Usage
-
-<!-- TODO: Rewrite this -->
-You can create a new campaign entry for a given user by performing a `POST` request to the `/campaign` endpoint:
-```shell
-curl -i -X POST http://127.0.0.1:3000/campaign/new -H 'Content-Type: application/json' -d '{"id":"test", "userId": "freddy", "data": "x1,x2,y1\n1,2,3\n4,5,6\n7,8,9" }'
+1. Otherwise, you can run the `python` code in `events/trigger.py`:
+```bash
+python events/trigger.py -0.5 0. 2.
 ```
-Note that you will have to send a dictionary containing all of the required fields. The response will be a HTTP response with `200` status code indicating success, and anything else for a failure.
+which takes arguments for the real, imaginary and size parameters, respectively. This will create `test.html`, where the Mandelbrot set can then be viewed in a browser.
+
+1. Finally, the `lambda` can be invoked via the webpage in `static/index.html`, which will automatically update once the lambda has generated a new Mandelbrot set image.
