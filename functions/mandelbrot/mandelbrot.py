@@ -1,6 +1,7 @@
 import io
 import numpy as np
 import matplotlib.pyplot as plt
+import base64
 
 # def sample(c, max_iters):
 #     """
@@ -49,7 +50,19 @@ def create_image(real_start, real_end, imag_start, image_end, max_iters, width, 
     buffer = io.BytesIO()
     plt.savefig(buffer, format="png", bbox_inches='tight',
                 pad_inches=0)  # Place the png as a binary in memory
-    return buffer.getvalue()  # Return the png binary (avoids saving to disk)
+    data = buffer.getvalue()      # Get the binary
+    data = base64.b64encode(data) # Encode to base64 bytes
+    data = data.decode()          # Convert bytes to string
+    return data # Return the encoded png binary
+
+#image = np.random.randn(100, 100)
+
+# plt.imshow(image)
+# buffer = io.BytesIO()
+# plt.savefig(buffer, format="png")
+
+# data = base64.b64encode(buffer.getvalue()).decode()
+# print(type(data), data)
 
 
 # if __name__ == "__main__":
