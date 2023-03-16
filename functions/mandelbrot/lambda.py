@@ -44,15 +44,14 @@ def handler(event, context, verbose=True):
     # Return the response
     response = {
         "message": "Request received.",
-        # "data": json.dump(data.encode("base64")),
-        "data": str(data),
+        "data": str(data), # TODO: Is this necessary?
     }
     return {
-        "statusCode": 200,
-        "headers": {
-            "Access-Control-Allow-Headers" : "Content-Type",
+        "statusCode": 200, # 200 = OK
+        "headers": { # Headers are necessary for CORS
+            "Access-Control-Allow-Headers": "Content-Type",
             "Access-Control-Allow-Origin": "*", 
-            "Access-Control-Allow-Methods": "GET, POST", 
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS", 
         },
         "body": json.dumps(response),
     }
