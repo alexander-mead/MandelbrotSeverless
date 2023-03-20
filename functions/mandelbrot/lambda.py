@@ -42,17 +42,22 @@ def handler(event, context, verbose=True):
     data = mandelbrot.create_image(
         rmin, rmax, imin, imax, max_iters, width, height)
 
-    # Return the response
+    # Construct the response
+    status = 200  # 200 = OK
+    headers = {  # Headers are necessary for CORS
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    }
     response = {
         "message": "Request received.",
-        "data": str(data),  # TODO: Is this necessary?
+        "data": str(data),  # TODO: Is this str necessary?
     }
-    return {
-        "statusCode": 200,  # 200 = OK
-        "headers": {  # Headers are necessary for CORS
-            "Access-Control-Allow-Headers": "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        },
+
+    # Return the response
+    result = {
+        "statusCode": status,
+        "headers": headers,
         "body": json.dumps(response),
     }
+    return result
