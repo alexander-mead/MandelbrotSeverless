@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  DigiLab SAM template for Mandelbrot image generation
+  SAM template for Mandelbrot image generation
 
 Globals:
   Api:
@@ -32,9 +32,9 @@ Resources:
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./functions/mandelbrot
-      DockerTag: python3.9-v1
+      DockerTag: python3.10
 
 Outputs:
   MandelbrotApi:
     Description: "API Gateway endpoint URL for Mandelbrot function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/mandelbrot"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/mandelbrot"

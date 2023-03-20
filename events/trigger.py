@@ -3,8 +3,8 @@ import requests
 import sys
 
 # Parameters
-URL = "http://127.0.0.1:3000"
-#URL = "https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com/Prod"
+# URL = "http://127.0.0.1:3000"
+URL = "https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com"
 OUT = "mandelbrot.html"
 
 # Welcome
@@ -25,8 +25,8 @@ r = requests.post(URL+"/mandelbrot", headers=headers, json=data)
 
 # This is the data returned from the server
 print("Return from request:", type(r), r)
-print("Return from request:", type(r.json()), r.json().keys())#, r.json())
-print("Return from request:", type(r.json()["data"]))#, r.json()["data"])
+print("Return from request:", type(r.json()), r.json().keys())  # , r.json())
+print("Return from request:", type(r.json()["data"]))  # , r.json()["data"])
 
 # Convert the data format
 data = r.json()["data"]
@@ -46,5 +46,6 @@ print("First 25 characters of data:", data[:25])
 # Write the data to a webpage
 with open(OUT, "w") as f:
     print("Writing to file:", f.name)
-    f.write(f"<html><body><img src='data:image/png;base64,{data}'></body></html>")
+    f.write(
+        f"<html><body><img src='data:image/png;base64,{data}'></body></html>")
 print("Done\n")

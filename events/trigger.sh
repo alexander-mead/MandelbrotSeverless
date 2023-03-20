@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-baseURL="http://127.0.0.1:3000"
-#baseURL="https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com/Prod"
+# baseURL="http://127.0.0.1:3000"
+baseURL="https://0hku56rtzd.execute-api.eu-west-1.amazonaws.com"
 URL=$baseURL"/mandelbrot"
 output="mandelbrot.json"
 
