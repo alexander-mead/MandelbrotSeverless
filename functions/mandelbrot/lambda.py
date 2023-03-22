@@ -45,9 +45,12 @@ def handler(event, context, verbose=True):
     # Construct the response
     status = 200  # 200 = OK
     headers = {  # Headers are necessary for CORS
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        # "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Origin": "*",  # NOTE: Necessary
+        # "Access-Control-Allow-Credentials": "true",
+        # "Access-Control-Expose-Headers": "x-api-id",
+        # "Access-Control-Max-Age": "300",
+        # "Access-Control-Allow-Methods": "*",
     }
     response = {
         "message": "Request received.",
@@ -58,6 +61,6 @@ def handler(event, context, verbose=True):
     result = {
         "statusCode": status,
         "headers": headers,
-        "body": json.dumps(response),
+        "body": json.dumps(response),  # NOTE: This json.dumps is necessary!
     }
     return result

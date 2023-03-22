@@ -12,8 +12,8 @@ Globals:
       AllowCredentials: "'*'"
   Function:
     Architectures:
-      - x86_64
-      # - arm64
+      # - x86_64
+      - arm64
     Timeout: 60
 
 Resources:
@@ -30,11 +30,10 @@ Resources:
             Method: post
       MemorySize: 128
     Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./functions/mandelbrot
-      DockerTag: python3.10
+      Dockerfile: Dockerfile # The name of the Dockerfile associated with the Lambda function.
+      DockerContext: ./functions/mandelbrot # The location of the Dockerfile
 
 Outputs:
   MandelbrotApi:
     Description: "API Gateway endpoint URL for Mandelbrot function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/mandelbrot"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/mandelbrot"

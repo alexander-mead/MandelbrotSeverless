@@ -24,7 +24,7 @@ def sample_area(real_start, real_end, imag_start, image_end, max_iters, width, h
 
 
 def create_image(real_start, real_end, imag_start, image_end, max_iters, width, height,
-                 cmap="cubehelix", figsize=(6, 6), dpi=224, sigma=1.):
+                 cmap="cubehelix", dpi=224, sigma=1.):
     """
     Create a png and return it as a binary
     """
@@ -32,6 +32,7 @@ def create_image(real_start, real_end, imag_start, image_end, max_iters, width, 
                         image_end, max_iters, width, height)
     if sigma != 0.:
         array = gaussian_filter(array, sigma=sigma)
+    figsize = width/dpi, height/dpi
     plt.subplots(figsize=figsize, dpi=dpi, frameon=False)
     plt.imshow(array, cmap=cmap, vmin=0., vmax=max_iters)
     plt.xticks([])
