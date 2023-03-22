@@ -11,6 +11,14 @@ const image = () => {
     method: "POST", // Unless this is present it will default to "GET"
     headers: {
       "Content-Type": "application/json",
+      // Uncommenting the below makes this fail
+      // TODO: Figure out CORS headers
+      // "Access-Control-Allow-Headers": "Content-Type",
+      // "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Allow-Credentials": "true",
+      // "Access-Control-Expose-Headers": "x-api-id",
+      // "Access-Control-Max-Age": "300",
+      // "Access-Control-Allow-Methods": "*",
     },
     body: JSON.stringify({
       real: real,
@@ -34,7 +42,8 @@ const image = () => {
       document.getElementById("image").src = image; // To set image within html
       console.log("Image displayed");
     })
-    //.then(document.getElementById("buttonId").disabled = true) // TODO: Disable button to prevent multiple requests
+    // TODO: Disable button to prevent multiple requests
+    //.then(document.getElementById("buttonId").disabled = true)
     .catch((error) => {
       console.log("Error:", error);
       console.log("Failed to sample image");
