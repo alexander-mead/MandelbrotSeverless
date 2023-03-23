@@ -42,21 +42,30 @@ def handler(event, context, verbose=True):
     width, height = 1000, 1000
     data = mandelbrot.create_image(
         rmin, rmax, imin, imax, max_iters, width, height)
+    data = base64.b64encode(data)  # Encode to base64 bytes
+    data = data.decode()           # Convert bytes to string
 
     # Construct the response
     status = 200  # 200 = OK
     headers = {  # Headers are necessary for CORS
-        "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
-        "Access-Control-Allow-Origin": "*",  # NOTE: Necessary
-        "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
-        "Access-Control-Allow-Credentials": "true",
+        # "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
+        # "Access-Control-Allow-Origin": "*",  # NOTE: Necessary
+        # "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+        # "Access-Control-Allow-Credentials": "true",
         # "Access-Control-Expose-Headers": "x-api-id",
         # "Access-Control-Max-Age": "300",
         # "Access-Control-Allow-Methods": "*",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": "*",
+        "Access-Control-Expose-Headers": "x-api-id",
+        "Access-Control-Max-Age": "300",
+        "Access-Control-Allow-Methods": "*",
     }
     response = {
         "message": "Request received.",
-        "data": str(data),  # TODO: Is this str necessary?
+        "data": data,
     }
 
     # Return the response

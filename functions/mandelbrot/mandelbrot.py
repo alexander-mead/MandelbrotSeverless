@@ -42,6 +42,4 @@ def create_image(real_start, real_end, imag_start, image_end, max_iters, width, 
     plt.savefig(buffer, format="png", bbox_inches='tight',
                 pad_inches=0)      # Place the png as a binary in memory
     data = buffer.getvalue()       # Get the binary
-    data = base64.b64encode(data)  # Encode to base64 bytes
-    data = data.decode()           # Convert bytes to string
     return data  # Return the encoded png binary
