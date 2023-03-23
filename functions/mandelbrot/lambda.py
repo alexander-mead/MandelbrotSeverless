@@ -8,15 +8,16 @@ import mandelbrot
 
 def unwrap_payload(event):
     if "body" not in event:  # Get body
-        raise Exception("No body in request.")
-    body = event["body"]
+        raise Exception("No body in request")
+    else:
+        body = event["body"]
     if "isBase64Encoded" in event:  # Decode
         if event["isBase64Encoded"]:
             body = base64.b64decode(body)
     try:  # Parse
         payload = json.loads(body)
     except:
-        raise Exception("Could not parse body as JSON.")
+        raise Exception("Could not parse body as JSON")
     return payload
 
 
@@ -45,9 +46,10 @@ def handler(event, context, verbose=True):
     # Construct the response
     status = 200  # 200 = OK
     headers = {  # Headers are necessary for CORS
-        # "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
         "Access-Control-Allow-Origin": "*",  # NOTE: Necessary
-        # "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+        "Access-Control-Allow-Credentials": "true",
         # "Access-Control-Expose-Headers": "x-api-id",
         # "Access-Control-Max-Age": "300",
         # "Access-Control-Allow-Methods": "*",

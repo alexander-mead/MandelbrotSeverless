@@ -11,6 +11,7 @@ const image = () => {
     method: "POST", // Unless this is present it will default to "GET"
     headers: {
       "Content-Type": "application/json",
+      Accept: "application/json",
       // Uncommenting the below makes this fail
       // TODO: Figure out CORS headers
       // "Access-Control-Allow-Headers": "Content-Type",
