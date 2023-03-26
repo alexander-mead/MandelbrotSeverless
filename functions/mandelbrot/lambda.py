@@ -49,10 +49,9 @@ def handler(event, context, verbose=True):
     status = 200  # 200 = OK
     headers = {  # Headers are necessary for CORS
         "Content-Type": "application/json",
-        # "Access-Control-Allow-Headers": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Headers": "*",
         "Access-Control-Allow-Origin": "*",
-        # "Access-Control-Allow-Credentials": "*",
+        "Access-Control-Allow-Credentials": "*",
         "Access-Control-Allow-Methods": "*",
     }
     response = {
