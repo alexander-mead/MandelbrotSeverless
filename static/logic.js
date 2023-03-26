@@ -12,14 +12,6 @@ const image = () => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      // Uncommenting the below makes this fail
-      // TODO: Figure out CORS headers
-      // "Access-Control-Allow-Headers": "Content-Type",
-      // "Access-Control-Allow-Origin": "*",
-      // "Access-Control-Allow-Credentials": "true",
-      // "Access-Control-Expose-Headers": "x-api-id",
-      // "Access-Control-Max-Age": "300",
-      // "Access-Control-Allow-Methods": "*",
     },
     body: JSON.stringify({
       real: real,
